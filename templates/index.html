@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MNIST Digit Classifier</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        MNIST Digit Classifier
+    </div>
+
+</header>
+
+<main>
+
+    <section class="hero">
+
+        <h1>Handwritten Digit Recognition</h1>
+
+        <p>
+            Upload an image of a handwritten digit (0–9).
+        </p>
+
+    </section>
+
+    <section class="card">
+
+        <form action="/predict" method="POST" enctype="multipart/form-data">
+
+            <label class="upload-area">
+
+                <input
+                    type="file"
+                    id="image"
+                    name="image"
+                    accept="image/*"
+                    required
+                    onchange="previewImage(event)"
+                >
+
+                <div id="uploadContent">
+
+                    <div class="upload-icon">
+                        ☁
+                    </div>
+
+                    <h3>Drag & Drop</h3>
+
+                    <span>or Click to Browse</span>
+
+                    <small>
+                        PNG • JPG • JPEG
+                    </small>
+
+                </div>
+
+            </label>
+
+            <img
+                id="preview"
+                src="#"
+                alt="Preview"
+            >
+
+            <button type="submit">
+
+                Predict Digit
+
+            </button>
+
+        </form>
+
+    </section>
+
+    {% if prediction is defined %}
+
+    <section class="results">
+
+        <div class="result-box">
+
+            <h4>Prediction</h4>
+
+            <div class="prediction">
+
+                {{ prediction }}
+
+            </div>
+
+        </div>
+
+        <div class="result-box">
+
+            <h4>Confidence</h4>
+
+            <div class="confidence">
+
+                {{ confidence }}%
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="uploaded">
+
+        <h3>Uploaded Image</h3>
+
+        <img
+            class="uploaded-image"
+            src="{{ image_path }}"
+        >
+
+    </section>
+
+    {% endif %}
+
+    {% if error %}
+
+    <div class="error">
+
+        {{ error }}
+
+    </div>
+
+    {% endif %}
+
+</main>
+
+<footer>
+
+    Built with Flask • TensorFlow • CNN
+
+</footer>
+
+<script>
+
+function previewImage(event){
+
+    const image=document.getElementById("preview");
+
+    image.src=URL.createObjectURL(event.target.files[0]);
+
+    image.style.display="block";
+
+}
+
+</script>
+
+</body>
+
+</html>
