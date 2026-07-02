@@ -30,6 +30,12 @@ mnist-digit-classifier/
 ├── README.md
 ├── .gitignore
 │
+├── screenshots/
+│     └── Screenshot 2026-07-02 223430.png
+│     └── Screenshot 2026-07-02 223509.png
+│     └── Screenshot 2026-07-02 223546.png
+│     └── render_screenshot.png
+│
 ├── templates/
 │     └── index.html
 │
